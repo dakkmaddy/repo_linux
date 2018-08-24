@@ -70,7 +70,8 @@ echo
 echo
 echo "End of script"
 echo "Results are in :"
-
+ls
 date | tee -a time.txt
+rm time.txt
 exit
 
