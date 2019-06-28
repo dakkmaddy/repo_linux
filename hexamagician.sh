@@ -191,13 +191,36 @@ echo "[-] Parsing shellcode file!"
 while read hexvaluetext
 do
 	# Do lots of stuff
+	# Step 1, work the ZERO function
+	# Will use a file called "/tmp/running_shellcode.txt"
+	#
+	running="/tmp/running_shellcode.txt"
+	if [ $usexor = "yes" ]
+	then
+		echo "\x31\x50" >> $running
+	else
+		echo "\x25\x4A\x4D\x4E\x55\x25\x35\x32\x31\x23\x54\x58" >> $running
+	fi
+	
 	#echo -n "[-] Reading line " && echo $hexvaluetext
 	#echo "[-] Convert to upper case for math conversion!"
 	makeupper=$(echo $hexvaluetext | tr "[abcdef]" "[ABCDEF]")
 	makedecimal=$(echo "obase=10; ibase=16; $makeupper" | bc)
-	echo $makedecimal
+	echo $makeupper >> $running
+	# Now that it has been converted to decimal, I can calculate the new numbers and work on the triggers for 2/3 operands math
+	#
+	# What is 100000000 (Hex) in decimal?
+	# Answer : 4294967296
+	# Everytime
+	# Calculting numbers for decimal and hextarget. Will be same.
+	#decimaltarget=(( 4294967296 - $makedecimal ))
+	#hextarget=$(echo "obase=16; ibase=10; $decimaltarget | bc)
 done < /tmp/shellcode_parse_1.txt
 #
+# New shellcode
+echo "[-] Here is your shellcode, enjoy!"
+cat $running
 # Removing temporary files
 #
 /bin/rm /tmp/shellcode_parse* 2>/dev/null
+/bin/rm $running 2>/dev/null
