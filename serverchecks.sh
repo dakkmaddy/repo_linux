@@ -1,5 +1,4 @@
 #Local Linux server checks
-# jm 1-8-2018
 # Update May 2018, using grep -v in processes, lighten load on directories
 # Update August 2018, added Linux capabilities check
 # Creating filename
