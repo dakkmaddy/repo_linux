@@ -5,4 +5,6 @@ This script may help you with Web enumeration
 It is clunky and will create some text file
 enjoy - dakkmaddy
 
-All others are self explanatory
+The other scripts do various small jobs
+And for the most part are self explanatory
+hexamagician is a work in progress, sometimes it performs, sometimes not so much
